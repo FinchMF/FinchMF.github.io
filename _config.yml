@@ -5,5 +5,5 @@ markdown: kramdown
 
 kramdown:
   input: GFM
-  math_engine: null
+  math_engine: mathjax
   syntax_highlighter: rouge

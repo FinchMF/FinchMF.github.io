@@ -12,14 +12,14 @@
   <!-- KaTeX -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      renderMathInElement(document.body, {
-        delimiters: [
-          {left: "$$", right: "$$", display: true},
-          {left: "$", right: "$", display: false}
-        ]
+      document.querySelectorAll('script[type^="math/tex"]').forEach(function(el) {
+        var displayMode = el.getAttribute('type').indexOf('mode=display') > -1;
+        var math = el.textContent;
+        var rendered = document.createElement(displayMode ? 'div' : 'span');
+        katex.render(math, rendered, { displayMode: displayMode, throwOnError: false });
+        el.parentNode.replaceChild(rendered, el);
       });
     });
   </script>

@@ -4,5 +4,5 @@ theme: minima
 markdown: kramdown
 
 kramdown:
-  math_engine: mathjax
+  math_engine: null
   syntax_highlighter: rouge

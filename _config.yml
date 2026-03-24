@@ -1,6 +1,8 @@
 title: "Matthew Finch"
 description: "ML, Systems, Interpretability"
 theme: minima
+markdown: kramdown
 
-# Optional
-author: "Matthew Finch"
+kramdown:
+  math_engine: mathjax
+  syntax_highlighter: rouge

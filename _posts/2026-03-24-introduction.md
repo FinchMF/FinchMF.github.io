@@ -44,7 +44,7 @@ where $L(M)$ is the description length of the model and $L(D \mid M)$ is the des
 
 ### Kolmogorov Complexity
 
-**Kolmogorov complexity** $K(x)$ defines the information content of a string $x$ as the length of the shortest program that produces it [Kolmogorov, 1965; Li & Vitányi, 2008]. Though $K$ is uncomputable in general, it provides the right conceptual framework: a trained model is a short program (the weights plus the architecture) that approximately reproduces the training data. The degree to which $|\theta| \ll |D|$ — number of effective parameters much less than data size — is a measure of how much structural compression the model has achieved.
+**Kolmogorov complexity** $K(x)$ defines the information content of a string $x$ as the length of the shortest program that produces it [Kolmogorov, 1965; Li & Vitányi, 2008]. Though $K$ is uncomputable in general, it provides the right conceptual framework: a trained model is a short program (the weights plus the architecture) that approximately reproduces the training data. The degree to which $\lvert\theta\rvert \ll \lvert D\rvert$ — number of effective parameters much less than data size — is a measure of how much structural compression the model has achieved.
 
 ### The Information Bottleneck
 
@@ -96,7 +96,7 @@ Mathematically, consider a single linear layer $y = Wx + b$. The weight matrix $
 
 This is already interpretable: $W$ encodes *which input patterns matter* and *how they are transformed*. In deeper networks, the composition of weight matrices across layers defines circuits — and the structure of those compositions is the network's learned theory, written in the language of linear algebra.
 
-For nonlinear networks, the local linearization (Jacobian) $J = \partial f / \partial x |_{x_0}$ plays the same role at each operating point. The eigenstructure of $J$ — its eigenvalues and eigenvectors — describes the local dynamics: which directions are amplified ($|\lambda| > 1$), which are suppressed ($|\lambda| < 1$), and which are preserved ($|\lambda| \approx 1$). In a dynamical model, this is the local stability structure, and it is encoded entirely in the weights.
+For nonlinear networks, the local linearization (Jacobian) $J = \partial f / \partial x \rvert_{x_0}$ plays the same role at each operating point. The eigenstructure of $J$ — its eigenvalues and eigenvectors — describes the local dynamics: which directions are amplified ($\lvert\lambda\rvert > 1$), which are suppressed ($\lvert\lambda\rvert < 1$), and which are preserved ($\lvert\lambda\rvert \approx 1$). In a dynamical model, this is the local stability structure, and it is encoded entirely in the weights.
 
 ---
 

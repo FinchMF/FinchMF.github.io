@@ -182,7 +182,7 @@ At any point along a trajectory, autograd computes the Jacobian of the learned t
 
 $$A_t = \frac{\partial f_\theta}{\partial z}\bigg|_{(z_t, x_t, \phi(m_t))}$$
 
-The spectral radius $\rho(A_t) = \max_i |\lambda_i(A_t)|$ — the magnitude of the largest eigenvalue — is the local stability score:
+The spectral radius $\rho(A_t) = \max_i \lvert\lambda_i(A_t)\rvert$ — the magnitude of the largest eigenvalue — is the local stability score:
 
 - $\rho < 1$: perturbations contract. The system *locally* tends to return toward its trajectory.
 - $\rho \approx 1$: marginally stable. Small perturbations neither grow nor decay.
@@ -218,6 +218,7 @@ Several patterns are immediately evident:
 The most diagnostic readout is the per-mode mean spectral radius — which failure types push the system closest to instability. Across all four systems:
 
 **Social Media:**
+
 | Mode | Mean $\rho$ | Interpretation |
 |------|-------------|----------------|
 | db_replication_lag | 0.317 | Most stable fault — slow drift, well-contained |
@@ -228,6 +229,7 @@ The most diagnostic readout is the per-mode mean spectral radius — which failu
 | notification_storm | 0.674 | **Most destabilizing** — cascading amplification |
 
 **E-commerce:**
+
 | Mode | Mean $\rho$ | Interpretation |
 |------|-------------|----------------|
 | fraud_detection_overload | 0.335 | Most stable — isolated compute bottleneck |
@@ -239,6 +241,7 @@ The most diagnostic readout is the per-mode mean spectral radius — which failu
 | flash_sale_surge | 0.581 | **Most destabilizing** — all components loaded simultaneously |
 
 **IoT Telemetry:**
+
 | Mode | Mean $\rho$ | Interpretation |
 |------|-------------|----------------|
 | device_registry_corruption | 0.296 | Most stable — affects metadata, not data flow |
@@ -251,6 +254,7 @@ The most diagnostic readout is the per-mode mean spectral radius — which failu
 | cold_start_lag | 0.525 | **Most destabilizing** — cascading initialization delays |
 
 **Financial Orders:**
+
 | Mode | Mean $\rho$ | Interpretation |
 |------|-------------|----------------|
 | market_data_stale | 0.317 | Most stable — stale data is detectable, contained |
@@ -451,7 +455,7 @@ This is the most important structural finding of the analysis, and it is invisib
 
 ### 7.2 Soft Mode Assignment
 
-The SSM assigns a soft probability distribution over modes at each timestep, based on prediction-error affinity — which mode-specific transition function best explains the observed dynamics. The entropy of this assignment, $H_t = -\sum_m p(m|z_t) \log p(m|z_t)$, provides a diagnostic in its own right:
+The SSM assigns a soft probability distribution over modes at each timestep, based on prediction-error affinity — which mode-specific transition function best explains the observed dynamics. The entropy of this assignment, $H_t = -\sum_m p(m\mid z_t) \log p(m\mid z_t)$, provides a diagnostic in its own right:
 
 | System | Mean Entropy | P95 Entropy | Max Entropy |
 |--------|-------------|-------------|-------------|

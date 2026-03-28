@@ -128,7 +128,9 @@ $$\mathcal{L} = \underbrace{\mathcal{L}_{\text{recon}}}_{\text{prediction}} + \l
 
 **Reconstruction loss** ($\mathcal{L}_{\text{recon}}$): MSE between predicted and actual observations, averaged over TBPTT chunks of 24 timesteps. This is the primary signal: the model must predict the system's telemetry.
 
-**Mode classification loss** ($\mathcal{L}_{\text{CE}}$, $\lambda_1 = 0.35$): cross-entropy from a linear head applied to the latent state $z_{t+1}$. Forces mode-discriminating information into the latent representation — the model cannot achieve low mode CE unless $z_t$ encodes *which regime the system is in*.
+{::nomarkdown}
+<p><strong>Mode classification loss</strong> ($\mathcal{L}_{\text{CE}}$, $\lambda_1 = 0.35$): cross-entropy from a linear head applied to the latent state $z_{t+1}$. Forces mode-discriminating information into the latent representation — the model cannot achieve low mode CE unless $z_t$ encodes <em>which regime the system is in</em>.</p>
+{:/nomarkdown}
 
 **Contrastive loss** ($\mathcal{L}_{\text{NT-Xent}}$, $\lambda_2 = 0.1$): the NT-Xent loss [Chen et al., 2020] applied to the final latent state of each TBPTT chunk, with mode identity as the positive-pair criterion. This pulls same-mode trajectory endpoints together and pushes different-mode endpoints apart, inducing a geometric structure in latent space where mode clusters are separated — a prerequisite for meaningful mode-conditioned analysis.
 
@@ -138,7 +140,9 @@ $$\mathcal{L}_{\text{NT-Xent}} = -\frac{1}{|P|} \sum_{(i,j) \in P} \log \frac{\e
 
 where $P$ is the set of positive pairs (same mode) and $\text{sim}(a,b) = a^\top b / \|a\|\|b\|$.
 
-**Jacobian spectral penalty** ($\mathcal{R}_{\text{jac}}$, $\lambda_3 = 0.5$): a regularizer on the spectral norm of the linearized normal-mode transition. The penalty targets the operator 2-norm of the composite weight matrix $W_{\text{normal}} = W_3 \cdot \text{diag}(\text{scale}_{\text{normal}}) \cdot W_2 \cdot W_1$, penalizing it when it exceeds a target $\rho_{\text{target}} = 0.80$:
+{::nomarkdown}
+<p><strong>Jacobian spectral penalty</strong> ($\mathcal{R}_{\text{jac}}$, $\lambda_3 = 0.5$): a regularizer on the spectral norm of the linearized normal-mode transition. The penalty targets the operator 2-norm of the composite weight matrix $W_{\text{normal}} = W_3 \cdot \text{diag}(\text{scale}_{\text{normal}}) \cdot W_2 \cdot W_1$, penalizing it when it exceeds a target $\rho_{\text{target}} = 0.80$:</p>
+{:/nomarkdown}
 
 $$\mathcal{R}_{\text{jac}} = \max\bigl(0,\, \|W_{\text{normal}}\|_2 - \rho_{\text{target}}\bigr)^2$$
 

@@ -206,8 +206,9 @@ where $\bar{\alpha}_l$ are average activation gates (ReLU and dropout). Each ent
 
 This matrix is a linearized view of a nonlinear network. The ReLU activations introduce input-dependent gating that the average-activation approach only partially captures. What we analyze is the instrument's *average behavior* — appropriate for asking "what did the network learn in general?" and less appropriate for asking "what did it do to this specific input?" The 17 harmonic relationships identified below were verified against the network's actual frequency-response behavior (single-bin impulse responses), confirming that the linearized portrait captures genuine structure rather than averaging artifacts.
 
-![Effective weight matrix heatmap](/assets/part_3/aud_weff_heatmap_1.png)
-*Figure 3. $W_{\text{eff}}$ for COLUMNS. Each column shows how a collapsed frequency bin maps to the full output set. The bright off-diagonal band connecting 21.6 Hz to targets above 200 Hz is the hub structure described in §5.3 — the 47:1 harmonic relationship the network discovered without being told about harmonic series.*
+
+![Original, collapsed, and destroyed spectral information](/assets/part_3/aud_original_collapse_destroy_1.png)
+*Figure 4. The projection pipeline. Left: original 12-TET spectrogram. Center: 5-TET collapsed representation with visible null space — frequency bins snapped to the coarser grid, gaps where off-grid content has been annihilated. Right: the destroyed information — the difference between original and collapsed, representing the spectral detail the network must learn to recover.*
 
 ### 5.2 Eigendecomposition: Spectral Modes
 
@@ -265,7 +266,7 @@ Key patterns:
 - **Hub structure** — the 21.6 Hz bin functions as a harmonic root, with the strongest and most numerous connections
 
 ![Harmonic connection network](/assets/part_3/aud_harmonic_network_1.png)
-*Figure 4. The harmonic connection network discovered by the trained weights. Each edge is a learned integer-ratio relationship. The 21.6 Hz hub at bottom left fans out to targets spanning the full spectral range — the network has reconstructed the harmonic series from statistical evidence alone.*
+*Figure 6. The harmonic connection network discovered by the trained weights. Each edge is a learned integer-ratio relationship. The 21.6 Hz hub at bottom left fans out to targets spanning the full spectral range — the network has reconstructed the harmonic series from statistical evidence alone.*
 
 ### 5.4 What This Tells Us About the Composition
 
@@ -381,10 +382,10 @@ When you listen to the audiation:
 - The **reconstruction** sounds like *COLUMNS* passed through a filter that preserved its large-scale harmonic architecture but smoothed its timbral detail. The upper harmonics are attenuated — the shimmering harmonic stasis that made the original sound like Beach House is exactly the spectral content the 5-TET collapse destroyed and the network could only partially recover. What remains is the harmonic skeleton — the columns of sound, stripped of their overtone shimmer. You hear what the network's theory *can* explain, and the gaps are what it cannot.
 
 ![Eigenvector spectral modes](/assets/part_3/aud_eigenvector_modes_1.png)
-*Figure 6. The dominant eigenvector spectral modes of $W_{\text{eff}}$. Each mode defines a frequency-space direction the network treats as an atomic harmonic unit. The peak structure within each eigenvector reveals how the model groups frequencies — these are the spectral "chords" the network considers fundamental to reconstruction.*
+*Figure 7. The dominant eigenvector spectral modes of $W_{\text{eff}}$. Each mode defines a frequency-space direction the network treats as an atomic harmonic unit. The peak structure within each eigenvector reveals how the model groups frequencies — these are the spectral "chords" the network considers fundamental to reconstruction.*
 
 ![Spectral comparison: original vs. collapsed vs. reconstructed](/assets/part_3/aud_spectral_comparison_1.png)
-*Figure 7. Original spectrogram (top left), 5-TET collapsed (top right), model-reconstructed (bottom left). The broad structure is restored; the fine high-frequency detail — visible as bright upper traces in the original — remains attenuated in the reconstruction. That difference is the sound of the 80.6% the theory could not recover.*
+*Figure 8. Original spectrogram (top left), 5-TET collapsed (top right), model-reconstructed (bottom left). The broad structure is restored; the fine high-frequency detail — visible as bright upper traces in the original — remains attenuated in the reconstruction. That difference is the sound of the 80.6% the theory could not recover.*
 
 ---
 

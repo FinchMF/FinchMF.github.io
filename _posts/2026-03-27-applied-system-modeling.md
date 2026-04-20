@@ -10,7 +10,7 @@ date: 2026-03-27
 
 > **Preceding**: [Weights as Theory: What Trained Models Actually Learn](/2026/03/24/introduction.html) — the general claim and its mathematical grounding
 >
-> **Following**: Part 3 — Hearing Structure: Compositional Analysis via Audio Synthesis
+> **Following**: [Part 3 — Hearing Structure: Compositional Analysis via Audio Synthesis](/2026/04/20/hearing-structure.html)
 
 ---
 
